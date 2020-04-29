@@ -7,7 +7,7 @@
 2. <b>The designed the weak entities (entities on the many side of one-to-many relationships). </b>
     1. These entities were the tables CATALOG_COURSE, OFFERINGS_COURSE, and MEETINGS_COURSE. Each of these tables could not be uniquely defined without one of the strong entities in step 1-1.
 3. <b>Note: We resolved many of the normalization requirements by creating unique, auto-incrementing ID’s for each table row. </b>
-4. (Link to ERD)
+4. [Course Data ERD](Docs/CourseDataERD.pdf)
 
 ## Process 2: Creating the normalized database and importing the data
 1. <b>Load the SQL extension</b>
@@ -19,7 +19,7 @@
     2. Weak entity tables to be created after - CATALOG_COURSE (with a FK from the PROGRAM table), OFFERINGS_COURSE (with FK’s from the CATALOG_COURSE table and INSTRUCTOR table), and finally MEETINGS_COURSE (with FK’s from the LOCATION and OFFERINGS_COURSE table).
 5. <b>Using the INSERT INTO commands to move data from the corresponding datasets into each table. We populated the strong entities first, then the weak entities (due to FK reliance). We used the same order as the table creations to minimize any potential issues. </b>
 6. <b>Dropping the CSV datasets and vacuuming the data to clean up space issues.</b>
-7. (Link to CourseDataETL)
+7. [Course Data Creation](CourseDataETL.ipynb)
 
 ## Process 3: Testing data integrity of the database
 1. <b>Load the SQL extension</b>
@@ -30,11 +30,11 @@
     2. Testing some of the weak entities (OFFERING_COURSE in this case) to see if there is any data mismatch
     3. Digging into a potential data mismatch error. Data appears to be fine, however, noting a possible need to remove inaccurate data from the dataset in the future.
     4. Testing more complicated joins and ensuring that the data appears to be pulling correctly for the weakest entity (MEETINGS_COURSE).
-5. (Link to CourseDataTests)
+5. [Course Data Tests](CourseDataTests.ipynb)
 
 
 ## Process 4: Designing a scehma data warehouse
-1. (Link to star schema ERD)
+1. [Course Data Snowflake ERD](Docs/REG-COURSE-ERD.pdf)
 
 ## Process 5: Creating a star scehma data warehouse
 1. <b>Load the SQL extension</b>
@@ -46,4 +46,13 @@
     1. Dimension tables populated first
     2. Before populating the fact table, we test a select query with a large number of joins to ensure that the data is pulling correctly before we insert it. Once we are satisfied with the testing, we populate the fact table.   
 5. <b>COUNT the rows on the fact table to ensure that the number of total rows lines up with the rows added.</b>
-6. (Link to CourseDataWarehouse)
+6. [Course Data Creation](CourseDataWarehouseETL.ipynb)
+
+## Process 6: Testing the data warehouse
+1. <b>Load the SQL extension</b>
+2. <b>Connecting SQLite to the CourseDataWarehouse database</b>
+4. <b>Random data tests</b>
+5. [Course Data Warehouse Tests](CourseDataWarehouseTest.ipynb)
+
+## Process 7: Query demo
+1. [Course Data Warehouse Demo](CourseDataWarehouseDemo.ipynb)
